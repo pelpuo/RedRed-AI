@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block body %}
+    <div class="container">
+        <div class="col-md-6 offset-md-3">
+            {% if data %}
+                <h3>Detected Gobɛ with {{ data.confidence }}% confidence</h3>
+                <img class="img-responsive"height="400" src="{{ url_for('static', filename=data.prediction) }}" alt="Placeholder Image">
+            {% else %}
+                <img height="400" class="img-responsive"src="{{ url_for('static', filename='images/placeholder.png') }}" alt="Prediction">
+            {% endif %}
+        </div>
+        <div class="col-md-6 offset-md-3">
+            <form method="POST" action="/model/predict" enctype="multipart/form-data">
+                <h4>Upload Image:</h4>
+                <input type="file" name="file">
+                <input type="submit" value="submit">
+            </form>
+        </div>
+    </div>
+{% endblock %}
